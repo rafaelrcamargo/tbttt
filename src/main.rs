@@ -84,9 +84,12 @@ fn draw_grid(grid: &[[&str; 9]]) {
 }
 
 fn read_move(input: String) -> (usize, usize) {
-    let input = input.split_at(2).0.to_lowercase();
+    if input.len() < 2 {
+        return (0, 0);
+    }
 
     // Check if input is valid
+    let input = input.split_at(2).0.to_lowercase();
     let re = Regex::new(r"^[abc][123]").unwrap();
     if !re.is_match(&input) {
         return (0, 0);
