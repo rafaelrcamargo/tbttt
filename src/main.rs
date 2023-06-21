@@ -84,7 +84,7 @@ fn draw_grid(grid: &[[&str; 9]]) {
 }
 
 fn read_move(input: String) -> (usize, usize) {
-    if input.len() < 2 {
+    if input.len() <= 2 {
         return (0, 0);
     }
 
