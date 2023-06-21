@@ -2,7 +2,7 @@
 
 > **Note**: Just a study of terminal based apps in rust, nothing too complex around here.
 
-I mean, why not?
+I mean, why not? It looks simpler than it is...
 
 ## License
 
