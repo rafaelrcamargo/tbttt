@@ -2,9 +2,8 @@
 
 I mean, why not?
 
-> Just a study of terminal based apps in rust, nothing too complex around here.
+> *Note*: Just a study of terminal based apps in rust, nothing too complex around here.
 
-#### TODO:
+## License
 
-- Fix valid input checking in `move` function.
-
+Don't worry about it.
