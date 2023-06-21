@@ -65,9 +65,7 @@ fn main() {
             std::thread::sleep(std::time::Duration::from_millis(1000));
 
             // Previous turn or keep at 0
-            if turn > 0 {
-                turn -= 1;
-            }
+            turn = turn.saturating_sub(1);
         }
     }
 }
@@ -105,7 +103,7 @@ fn read_move(input: String) -> (usize, usize) {
         })
         .collect();
 
-    return (coord[2], coord[1]);
+    (coord[2], coord[1])
 }
 
 fn check_status(grid: &[[&str; 9]]) -> Option<Status> {
