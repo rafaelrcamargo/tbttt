@@ -4,7 +4,7 @@ use std::io;
 enum Status {
     Draw,
     Undefined,
-    Win(usize)
+    Win(usize),
 }
 
 fn main() {
@@ -30,8 +30,11 @@ fn main() {
     while turn <= 9 {
         draw_grid(&grid);
 
-        let status =
-            if turn == 9 { Some(Status::Draw) } else { check_status(&grid) };
+        let status = if turn == 9 {
+            Some(Status::Draw)
+        } else {
+            check_status(&grid)
+        };
 
         match status {
             Some(Status::Draw) => {
@@ -49,9 +52,7 @@ fn main() {
         println!("{}'s turn: ", mark[turn & 1].trim());
 
         let mut input = String::new();
-        stdin
-            .read_line(&mut input)
-            .expect("Failed to read line");
+        stdin.read_line(&mut input).expect("Failed to read line");
         let (row, col) = read_move(input);
 
         // Check if the cell is empty
@@ -75,8 +76,7 @@ fn draw_grid(grid: &[[&str; 9]]) {
 
     // Grid
     grid.iter().for_each(|row| {
-        row.iter()
-            .for_each(|col| print!("{}", col));
+        row.iter().for_each(|col| print!("{}", col));
         println!()
     });
 
@@ -99,7 +99,7 @@ fn read_move(input: String) -> (usize, usize) {
             "a" | "1" => 2usize,
             "b" | "2" => 4usize,
             "c" | "3" => 6usize,
-            _ => 0usize
+            _ => 0usize,
         })
         .collect();
 
@@ -112,8 +112,7 @@ fn check_status(grid: &[[&str; 9]]) -> Option<Status> {
 
     for i in 0..3 {
         let row = [grid[i * 2 + 2][2], grid[i * 2 + 2][4], grid[i * 2 + 2][6]];
-        let col =
-            vec![grid[2][i * 2 + 2], grid[4][i * 2 + 2], grid[6][i * 2 + 2]];
+        let col = vec![grid[2][i * 2 + 2], grid[4][i * 2 + 2], grid[6][i * 2 + 2]];
         let diag = vec![grid[2][i * 2 + 2], grid[4][4], grid[6][6 - i * 2]];
 
         if (row.iter().all(|&x| x == row[2]) && mark.contains(&row[2]))
@@ -121,9 +120,7 @@ fn check_status(grid: &[[&str; 9]]) -> Option<Status> {
             || (diag.iter().all(|&x| x == diag[2]) && mark.contains(&diag[2]))
         {
             status = Some(Status::Win(
-                mark.iter()
-                    .position(|&x| x == diag[2])
-                    .unwrap()
+                mark.iter().position(|&x| x == diag[2]).unwrap(),
             ));
         }
     }
